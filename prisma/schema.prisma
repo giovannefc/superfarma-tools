@@ -1,0 +1,74 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String  @id @default(cuid())
+  email    String  @unique
+  name     String
+  password String
+  isAdmin  Boolean
+  active   Boolean @default(true)
+}
+
+enum EmprestimoStatus {
+  PAGO
+  PENDENTE
+  SEPARADO
+}
+
+enum EmprestimoTipo {
+  ENTRADA
+  SAIDA
+}
+
+model Emprestimo {
+  id           String             @id @default(cuid())
+  userId       String
+  parceiroId   String
+  data         DateTime
+  produto      String
+  fabricante   String
+  quantidade   Int
+  requisitante String
+  parceiro     EmprestimoParceiro @relation(fields: [parceiroId], references: [id], onDelete: Cascade)
+  tipo         EmprestimoTipo
+  status       EmprestimoStatus
+}
+
+model EmprestimoParceiro {
+  id         String       @id @default(cuid())
+  userId     String
+  nome       String
+  ativo      Boolean      @default(true)
+  Emprestimo Emprestimo[]
+}
+
+model Conciliacao {
+  id          String   @id @default(cuid())
+  userId      String
+  dataInicial DateTime
+  dataFinal   DateTime
+  cartoes     Cartao[]
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model Cartao {
+  id            String      @id @default(cuid())
+  userId        String
+  conciliacaoId String
+  dataHora      DateTime
+  modalidade    String
+  bandeira      String
+  parcelas      String
+  valor         Float
+  conciliacao   Conciliacao @relation(fields: [conciliacaoId], references: [id], onDelete: Cascade)
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+}

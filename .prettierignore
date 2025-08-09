@@ -1,0 +1,10 @@
+/.cache
+/.github
+/build
+/public
+/node_modules
+/dist
+/app/app.css
+/app/lib/vendure-api/generated
+/.react-router
+pnpm-lock.yaml
