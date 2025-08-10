@@ -13,7 +13,10 @@ import { requireUser } from "~/services/auth.server";
 import { formatDateOnly } from "~/utils";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  await requireUser(request);
+  const user = await requireUser(request);
+  if (!user?.isAdmin) {
+    throw new Response("Acesso negado", { status: 403 });
+  }
 
   const dateRange = forceAndGetDateRange(request);
   if (dateRange instanceof Response) {

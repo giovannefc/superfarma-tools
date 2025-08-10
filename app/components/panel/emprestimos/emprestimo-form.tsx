@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EmprestimoTipo } from "@prisma/client";
 import { Save } from "lucide-react";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -8,6 +7,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "~/components/ui/button";
+import { EmprestimoTipo } from "~/lib/constants";
 
 import { useCreateEmprestimo } from "./create-emprestimo";
 import { DateInput } from "./date-input";
@@ -23,7 +23,7 @@ const createEmprestimoSchema = z.object({
   produto: z.string().min(1, "Campo obrigatório."),
   fabricante: z.string().min(1, "Campo obrigatório."),
   requisitante: z.string().min(1, "Campo obrigatório."),
-  tipo: z.enum(EmprestimoTipo),
+  tipo: z.enum([EmprestimoTipo.ENTRADA, EmprestimoTipo.SAIDA]),
   parceiroId: z.string().min(1),
   status: z.string().min(1, "Campo obrigatório."),
 });

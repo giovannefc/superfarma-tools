@@ -24,11 +24,20 @@ export async function loader({ request }: LoaderFunctionArgs) {
     }),
   );
 
+  // Converter datas para string para compatibilidade com o componente
+  const emprestimosRecentesFormatted = dashboardStats.emprestimosRecentes.map(
+    emprestimo => ({
+      ...emprestimo,
+      data: emprestimo.data.toISOString(),
+    }),
+  );
+
   return {
     user,
     stats: {
       ...dashboardStats,
       parceirosMaisAtivos: parceirosMaisAtivosComNomes,
+      emprestimosRecentes: emprestimosRecentesFormatted,
     },
   };
 }

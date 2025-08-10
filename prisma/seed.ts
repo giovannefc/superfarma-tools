@@ -6,36 +6,45 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Iniciando seed do banco de dados...");
 
-  // Verificar se o usuário já existe
-  const existingUser = await prisma.user.findUnique({
-    where: { email: "teste@teste.com" },
-  });
-
-  if (existingUser) {
-    console.log("👤 Usuário teste@teste.com já existe, pulando criação...");
-    return;
-  }
-
   // Criar hash da senha
   const hashedPassword = await bcrypt.hash("123456", 10);
 
-  // Criar usuário de teste
-  const user = await prisma.user.create({
-    data: {
-      email: "teste@teste.com",
-      name: "Usuário Teste",
+  // Criar usuário administrador
+  const adminUser = await prisma.user.upsert({
+    where: { email: "admin@teste.com" },
+    update: {},
+    create: {
+      email: "admin@teste.com",
+      name: "Administrador",
       password: hashedPassword,
       isAdmin: true,
       active: true,
     },
   });
 
-  console.log("✅ Usuário criado com sucesso:");
-  console.log(`   📧 Email: ${user.email}`);
-  console.log(`   👤 Nome: ${user.name}`);
-  console.log(`   🔑 Senha: 123456`);
-  console.log(`   👑 Admin: ${user.isAdmin ? "Sim" : "Não"}`);
-  console.log(`   ✅ Ativo: ${user.active ? "Sim" : "Não"}`);
+  // Criar usuário comum
+  const regularUser = await prisma.user.upsert({
+    where: { email: "user@teste.com" },
+    update: {},
+    create: {
+      email: "user@teste.com",
+      name: "Usuário Comum",
+      password: hashedPassword,
+      isAdmin: false,
+      active: true,
+    },
+  });
+
+  console.log("✅ Usuários criados com sucesso:");
+  console.log(
+    `   📧 Admin: ${adminUser.email} | 🔑 Senha: 123456 | 👑 Admin: Sim`,
+  );
+  console.log(
+    `   📧 User: ${regularUser.email} | 🔑 Senha: 123456 | 👑 Admin: Não`,
+  );
+
+  // Usar o usuário admin para criar os dados de exemplo
+  const user = adminUser;
 
   // Criar alguns parceiros de exemplo
   console.log("\n🤝 Criando parceiros de exemplo...");
@@ -211,7 +220,7 @@ async function main() {
 
   // Resumo final
   console.log("\n📊 Resumo dos dados criados:");
-  console.log(`   👤 1 usuário administrador`);
+  console.log(`   👤 2 usuários (1 admin + 1 comum)`);
   console.log(`   🤝 ${parceirosCriados.length} parceiros`);
   console.log(`   📤 ${emprestimosDevemos.length} empréstimos SAÍDA (devemos)`);
   console.log(

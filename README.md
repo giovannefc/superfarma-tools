@@ -128,11 +128,37 @@ app/
 └── hooks/              # Hooks customizados
 ```
 
-## 🔐 Autenticação
+## 🔐 Autenticação e Permissões
+
+### Sistema de Autenticação
 
 - **Login Seguro**: Autenticação baseada em sessão
-- **Controle de Acesso**: Rotas protegidas
+- **Controle de Acesso**: Rotas protegidas por nível de usuário
 - **Gerenciamento de Sessão**: Sessões persistentes
+
+### Níveis de Usuário
+
+#### 👑 **Administrador**
+
+- ✅ Dashboard
+- ✅ Empréstimos (completo)
+- ✅ Orçamentos
+- ✅ **Relatórios** (Balanço, Vendas, Despesas)
+- ✅ **Conferência de Cartões**
+
+#### 👤 **Usuário Comum**
+
+- ✅ Dashboard
+- ✅ Empréstimos (completo)
+- ✅ Orçamentos
+- ❌ Relatórios (bloqueado)
+- ❌ Conferência de Cartões (bloqueado)
+
+### Proteções Implementadas
+
+- **Layout Protection**: Rotas protegidas redirecionam para dashboard
+- **Menu Filtering**: Itens restritos não aparecem no menu
+- **API Protection**: Endpoints protegidos por nível de usuário
 
 ## 📊 Banco de Dados
 
@@ -165,6 +191,54 @@ docker build -t superfarma-tools .
 # Executar container
 docker run -p 3000:3000 superfarma-tools
 ```
+
+### 👥 Setup de Usuários de Produção
+
+Para configurar os usuários iniciais em produção, use os scripts dedicados:
+
+#### **Usuários Criados:**
+
+1. **Administrador**:
+   - 📧 Email: `giovannefc@gmail.com`
+   - 👤 Nome: `Giovanne Ferreira`
+   - 🔑 Senha: `03031987.TnT`
+   - 👑 Admin: **Sim** (acesso total)
+
+2. **Usuário Comum**:
+   - 📧 Email: `contato@superfarmapopular.com.br`
+   - 👤 Nome: `Super Farma Popular`
+   - 🔑 Senha: `101703tnt`
+   - 👤 Admin: **Não** (sem acesso a relatórios/conciliações)
+
+#### **Scripts de Setup:**
+
+```bash
+# Setup completo (migrations + usuários) - Recomendado
+npm run setup:prod
+
+# Apenas criar usuários
+npm run db:seed:prod
+
+# Execução direta
+npx tsx prisma/seed-production.ts
+```
+
+#### **Para Docker/Produção:**
+
+```bash
+# Entrar no container
+docker exec -it <container-name> sh
+
+# Executar setup
+npm run setup:prod
+```
+
+#### **Características:**
+
+- ✅ **Senhas hasheadas** com bcrypt
+- ✅ **Upsert seguro** - pode executar múltiplas vezes
+- ✅ **Não sobrescreve dados** existentes
+- ✅ **Logs seguros** - não expõe senhas
 
 ## 🧪 Testes
 

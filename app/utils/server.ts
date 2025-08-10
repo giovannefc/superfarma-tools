@@ -1,6 +1,7 @@
-import { EmprestimoTipo } from "@prisma/client";
 import { lastDayOfMonth, parseISO, setDate, subMonths } from "date-fns";
 import { redirect } from "react-router";
+
+import { EmprestimoTipo } from "~/lib/constants";
 
 import { getDateRangeSearchParams } from "./client";
 

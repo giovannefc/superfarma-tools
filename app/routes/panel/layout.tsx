@@ -48,7 +48,7 @@ const navigationGroups = [
         name: "Orçamentos",
         href: "/panel/orcamentos",
         icon: FileText,
-        restrict: true,
+        restrict: false,
       },
       {
         name: "Empréstimos",
@@ -114,21 +114,27 @@ function SidebarContent({
 
       {/* Navigation */}
       <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-auto p-2">
-        {navigationGroups.map(group => (
-          <div
-            key={group.label}
-            className="relative flex w-full min-w-0 flex-col"
-          >
-            {/* Group Label */}
-            <div className="text-muted-foreground/70 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium">
-              {group.label}
-            </div>
+        {navigationGroups
+          .map(group => ({
+            ...group,
+            items: group.items.filter(
+              item => !item.restrict || (item.restrict && isAdmin),
+            ),
+          }))
+          .filter(group => group.items.length > 0)
+          .map(group => (
+            <div
+              key={group.label}
+              className="relative flex w-full min-w-0 flex-col"
+            >
+              {/* Group Label */}
+              <div className="text-muted-foreground/70 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium">
+                {group.label}
+              </div>
 
-            {/* Group Items */}
-            <ul className="flex w-full min-w-0 flex-col gap-1">
-              {group.items
-                .filter(item => !item.restrict || (item.restrict && isAdmin))
-                .map(item => (
+              {/* Group Items */}
+              <ul className="flex w-full min-w-0 flex-col gap-1">
+                {group.items.map(item => (
                   <li key={item.name} className="group/menu-item relative">
                     <NavLink
                       to={item.href}
@@ -151,9 +157,9 @@ function SidebarContent({
                     </NavLink>
                   </li>
                 ))}
-            </ul>
-          </div>
-        ))}
+              </ul>
+            </div>
+          ))}
       </div>
     </div>
   );

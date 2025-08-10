@@ -7,7 +7,6 @@ import {
   DollarSign,
   Minus,
   PiggyBank,
-  TrendingDown,
   TrendingUp,
 } from "lucide-react";
 import { type LoaderFunctionArgs } from "react-router";

@@ -14,11 +14,13 @@
     "format:check": "prettier --check .",
     "lint": "npm run format:check && npm run typecheck",
     "db:seed": "tsx prisma/seed.ts",
+    "db:seed:prod": "tsx prisma/seed-production.ts",
     "db:reset": "prisma migrate reset --force && prisma migrate deploy && npm run db:seed",
     "db:studio": "prisma studio",
     "services:up": "docker compose -f prisma/docker/compose.yml up -d",
     "services:stop": "docker compose -f prisma/docker/compose.yml stop",
-    "services:down": "docker compose -f prisma/docker/compose.yml down"
+    "services:down": "docker compose -f prisma/docker/compose.yml down",
+    "setup:prod": "prisma migrate deploy && npm run db:seed:prod"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",

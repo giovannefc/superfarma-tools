@@ -1,4 +1,3 @@
-import { EmprestimoStatus } from "@prisma/client";
 import {
   AlertTriangle,
   CheckCircle,
@@ -43,6 +42,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import { EmprestimoStatus } from "~/lib/constants";
 import type { EmprestimoFormatted } from "~/models/emprestimo.server";
 import type { ParceiroFromList } from "~/models/parceiro.server";
 import type { action as updateAction } from "~/routes/api/emprestimos";
