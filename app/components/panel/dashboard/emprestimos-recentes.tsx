@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { humanizeDate } from "~/utils";
+import { humanizeDate } from "~/lib/utils";
 
 interface EmprestimoRecente {
   id: string;

@@ -12,9 +12,9 @@ import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ExpensesAdapter } from "~/lib/adapters/reports-expenses.adapter";
-import { forceAndGetDateRange } from "~/lib/date-utils";
+import { forceAndGetDateRange } from "~/lib/utils";
+import { humanizeAmount, humanizeDate } from "~/lib/utils";
 import { requireUser } from "~/services/auth.server";
-import { humanizeAmount, humanizeDate } from "~/utils";
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
   const user = await requireUser(request);

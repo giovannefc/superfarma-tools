@@ -4,7 +4,7 @@ import type {
   EmprestimoTipo,
 } from "@prisma/client";
 
-import { prisma } from "~/lib/db.server";
+import { prisma } from "~/lib/server";
 
 export async function getDashboardStats(userId: string) {
   const [

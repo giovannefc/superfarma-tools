@@ -8,7 +8,7 @@ import { useNavigate, useSearchParams } from "react-router";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
 import { DateRangePicker } from "~/components/ui/date-range-picker";
-import { formatDateOnly } from "~/utils";
+import { formatDateOnly } from "~/lib/utils";
 
 interface DateRangeProps {
   from: Date;

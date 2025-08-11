@@ -10,8 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import { humanizeAmount, humanizeDate } from "~/lib/utils";
 import type { SistemaResult } from "~/models/types";
-import { humanizeAmount, humanizeDate } from "~/utils";
 
 interface SistemaResultTableProps {
   result: SistemaResult[];

@@ -6,9 +6,8 @@ import { FileUpload } from "~/components/panel/conciliations/file-upload";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { parseCSV, parseRedeCSV, readFileAsText } from "~/lib/parsers";
 import type { VendaRede } from "~/models/types";
-import { parseCSV, readFileAsText } from "~/utils/csv-parser";
-import { parseRedeCSV } from "~/utils/rede-csv-parser";
 
 interface CsvUploadSectionProps {
   onProcessFile: (vendas: VendaRede[]) => void;

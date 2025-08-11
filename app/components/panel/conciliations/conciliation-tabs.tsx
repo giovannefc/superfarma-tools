@@ -4,8 +4,8 @@ import { RedeResultTable } from "~/components/panel/conciliations/rede-result-ta
 import { SistemaResultTable } from "~/components/panel/conciliations/sistema-result-table";
 import { Separator } from "~/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { orderBy } from "~/lib/utils";
 import type { RedeResult, SistemaResult } from "~/models/types";
-import { orderBy } from "~/utils";
 
 interface ConciliationTabsProps {
   redeResult: RedeResult[];

@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "~/components/ui/button";
-import { EmprestimoTipo } from "~/lib/constants";
+import { EmprestimoTipo } from "~/lib/types";
 
 import { useCreateEmprestimo } from "./create-emprestimo";
 import { DateInput } from "./date-input";

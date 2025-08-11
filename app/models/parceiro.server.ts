@@ -1,6 +1,6 @@
 import type { EmprestimoParceiro } from "@prisma/client";
 
-import { prisma } from "~/lib/db.server";
+import { prisma } from "~/lib/server";
 
 export async function findAll(userId: string) {
   return await prisma.emprestimoParceiro.findMany({

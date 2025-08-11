@@ -2,9 +2,9 @@ import type { LoaderFunctionArgs } from "react-router";
 import { useLoaderData } from "react-router";
 
 import { EmprestimoList } from "~/components/panel/emprestimos/emprestimo-list";
+import { getEmprestimoTipo } from "~/lib/server";
 import { findAll } from "~/models/emprestimo.server";
 import { requireUser } from "~/services/auth.server";
-import { getEmprestimoTipo } from "~/utils/server";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const user = await requireUser(request);

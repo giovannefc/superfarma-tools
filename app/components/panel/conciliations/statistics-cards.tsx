@@ -1,7 +1,7 @@
 import { AlertTriangle, CreditCard, Monitor, TrendingUp } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { humanizeAmount } from "~/utils";
+import { humanizeAmount } from "~/lib/utils";
 
 interface StatisticsCardsProps {
   totalRede: number;

@@ -14,7 +14,7 @@
     "format:check": "prettier --check .",
     "lint": "npm run format:check && npm run typecheck",
     "db:seed": "tsx prisma/seed.ts",
-    "db:seed:prod": "tsx prisma/seed-production.ts",
+    "db:seed:prod": "npx tsx prisma/seed-production.ts",
     "db:reset": "prisma migrate reset --force && prisma migrate deploy && npm run db:seed",
     "db:studio": "prisma studio",
     "services:up": "docker compose -f prisma/docker/compose.yml up -d",

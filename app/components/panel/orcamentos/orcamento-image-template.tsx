@@ -3,8 +3,8 @@ import { Boxes, Droplets, Package, Pill } from "lucide-react";
 import { useCallback } from "react";
 
 import logo from "~/assets/sfp_logo.png";
+import { humanizeAmount } from "~/lib/utils";
 import type { Orcamento } from "~/models/types";
-import { humanizeAmount } from "~/utils";
 
 // Tipo para item do orçamento
 type OrcamentoItem = Orcamento["items"][0];

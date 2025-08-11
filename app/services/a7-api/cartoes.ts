@@ -1,5 +1,5 @@
+import { formatDateOnly } from "~/lib/utils";
 import type { VendaSistema } from "~/models/types";
-import { formatDateOnly } from "~/utils";
 
 import { fetchA7API } from "./client";
 

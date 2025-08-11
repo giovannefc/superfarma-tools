@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 
-import { prisma } from "~/lib/db.server";
+import { prisma } from "~/lib/server";
 
 export async function login(email: string, password: string) {
   const user = await prisma.user.findUnique({

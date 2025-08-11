@@ -7,7 +7,7 @@ import { TabelaVendas } from "~/components/panel/relatorios/tabela-vendas";
 import { VendasChart } from "~/components/panel/relatorios/vendas-chart";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { SalesAdapter } from "~/lib/adapters/reports-sales.adapter";
-import { forceAndGetDateRange } from "~/lib/date-utils";
+import { forceAndGetDateRange } from "~/lib/utils";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const dateRange = forceAndGetDateRange(request);

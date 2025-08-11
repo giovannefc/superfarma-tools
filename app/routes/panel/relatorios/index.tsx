@@ -18,7 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Progress } from "~/components/ui/progress";
 import { Separator } from "~/components/ui/separator";
 import { BalanceAdapter } from "~/lib/adapters/reports-balance.adapter";
-import { forceAndGetDateRange } from "~/lib/date-utils";
+import { forceAndGetDateRange } from "~/lib/utils";
 import { cn } from "~/lib/utils";
 
 export async function loader({ request }: LoaderFunctionArgs) {

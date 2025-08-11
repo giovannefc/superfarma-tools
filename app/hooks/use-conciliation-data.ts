@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
+import { orderBy } from "~/lib/utils";
 import type { ConciliacaoWithCount } from "~/models/conciliacao.server";
 import type { RedeResult, SistemaResult, VendaSistema } from "~/models/types";
-import { orderBy } from "~/utils";
 
 const bandeiraExchange = {
   Mastercard: "MASTER/VISA",

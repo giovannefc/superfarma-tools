@@ -1,7 +1,7 @@
 import type { Conciliacao } from "@prisma/client";
 import { addMinutes, max, min, subMinutes } from "date-fns";
 
-import { prisma } from "~/lib/db.server";
+import { prisma } from "~/lib/server";
 
 import type { VendaRede } from "./types";
 

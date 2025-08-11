@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { Authenticator } from "remix-auth";
 
-import { prisma } from "~/lib/db.server";
+import { prisma } from "~/lib/server";
 import { sessionStorage } from "~/services/session.server";
 
 export interface User {

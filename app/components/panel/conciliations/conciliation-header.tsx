@@ -2,7 +2,7 @@ import { ArrowLeft, Calendar, RotateCcw } from "lucide-react";
 import { Link } from "react-router";
 
 import { Button } from "~/components/ui/button";
-import { humanizeDate } from "~/utils";
+import { humanizeDate } from "~/lib/utils";
 
 interface ConciliationHeaderProps {
   dataInicial: Date;
