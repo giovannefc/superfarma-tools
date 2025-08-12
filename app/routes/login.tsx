@@ -9,10 +9,12 @@ import { authenticateUser, getUser } from "~/services/auth.server";
 import { sessionStorage } from "~/services/session.server";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  // Se o usuário já estiver autenticado, redirecionar para o painel
+  // Se o usuário já estiver autenticado, redirecionar
   const user = await getUser(request);
   if (user) {
-    return redirect("/panel");
+    const url = new URL(request.url);
+    const redirectTo = url.searchParams.get("redirectTo") || "/panel";
+    return redirect(redirectTo);
   }
   return null;
 }
@@ -32,8 +34,12 @@ export async function action({ request }: ActionFunctionArgs) {
     );
     session.set("user", user);
 
-    // Redirecionar com a sessão
-    return redirect("/panel", {
+    // Verificar se há redirectTo na URL
+    const url = new URL(request.url);
+    const redirectTo = url.searchParams.get("redirectTo") || "/panel";
+
+    // Redirecionar com a sessão para a página de destino
+    return redirect(redirectTo, {
       headers: {
         "Set-Cookie": await sessionStorage.commitSession(session),
       },

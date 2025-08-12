@@ -20,11 +20,11 @@ import { StatusInput } from "./status-input";
 const createEmprestimoSchema = z.object({
   data: z.date(),
   quantidade: z.number().min(1, "Campo obrigatório."),
-  produto: z.string().min(1, "Campo obrigatório."),
+  produto: z.string().min(1, "Por favor, escolha um produto..."),
   fabricante: z.string().min(1, "Campo obrigatório."),
   requisitante: z.string().min(1, "Campo obrigatório."),
   tipo: z.enum([EmprestimoTipo.ENTRADA, EmprestimoTipo.SAIDA]),
-  parceiroId: z.string().min(1),
+  parceiroId: z.string().min(1, "Por favor, escolha um parceiro..."),
   status: z.string().min(1, "Campo obrigatório."),
 });
 
@@ -47,6 +47,8 @@ export function EmprestimoForm() {
       data: new Date(),
       quantidade: 1,
       tipo,
+      produto: "",
+      parceiroId: "",
     },
   });
 
@@ -103,6 +105,7 @@ export function EmprestimoForm() {
           <ProdutoInput
             control={control}
             errors={errors}
+            autoFocus={true}
             onProductSelect={produto => {
               setValue("fabricante", produto.manufacturer.name);
             }}

@@ -58,7 +58,17 @@ export async function getUser(request: Request): Promise<User | null> {
 export async function requireUser(request: Request): Promise<User> {
   const user = await getUser(request);
   if (!user) {
-    throw new Response("Unauthorized", { status: 401 });
+    // Capturar a URL atual para redirecionamento após login
+    const url = new URL(request.url);
+    const redirectTo = url.pathname + url.search;
+
+    // Redirecionar para login com a URL de destino
+    throw new Response(null, {
+      status: 302,
+      headers: {
+        Location: `/?redirectTo=${encodeURIComponent(redirectTo)}`,
+      },
+    });
   }
   return user;
 }

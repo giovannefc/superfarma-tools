@@ -31,6 +31,7 @@ export function StatusInput({ control, errors }: StatusInputProps) {
       <Controller
         name="status"
         control={control}
+        defaultValue="PENDENTE"
         rules={{ required: "Campo obrigatório" }}
         render={({ field }) => (
           <Select onValueChange={field.onChange} value={field.value}>

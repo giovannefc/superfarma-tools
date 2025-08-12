@@ -37,12 +37,14 @@ interface ProdutoInputProps {
   control: Control<any>;
   errors: FieldErrors<any>;
   onProductSelect?: (produto: Produto) => void;
+  autoFocus?: boolean;
 }
 
 export function ProdutoInput({
   control,
   errors,
   onProductSelect,
+  autoFocus = false,
 }: ProdutoInputProps) {
   const fetcher = useFetcher<Produto[]>({ key: "searchProduct" });
 
@@ -50,6 +52,7 @@ export function ProdutoInput({
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const isSearchingRef = useRef(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Debounced search function
   const debouncedSearch = useCallback(
@@ -91,11 +94,25 @@ export function ProdutoInput({
     }
   };
 
-  // Clear produtos when popover closes
+  // Auto focus effect
+  useEffect(() => {
+    if (autoFocus) {
+      setTimeout(() => {
+        setOpen(true);
+      }, 100);
+    }
+  }, [autoFocus]);
+
+  // Clear produtos when popover closes and focus input when opens
   useEffect(() => {
     if (!open) {
       setSearchValue("");
       setProdutos([]);
+    } else {
+      // Foca no input quando o popover abre
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
     }
   }, [open]);
 
@@ -146,6 +163,7 @@ export function ProdutoInput({
             <PopoverContent className="w-full p-0" align="start">
               <Command shouldFilter={false}>
                 <CommandInput
+                  ref={inputRef}
                   placeholder="Digite para pesquisar produtos..."
                   value={searchValue}
                   onValueChange={handleSearchChange}
